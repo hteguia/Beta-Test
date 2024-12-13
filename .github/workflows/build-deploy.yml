@@ -13,22 +13,22 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2  # Récupérer le code source du dépôt
 
-    - name: Set up .NET
-      uses: actions/setup-dotnet@v2
+    - name: Set up .NET SDK
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '6.0'  # Définir la version de .NET (ajustez selon votre application)
+        dotnet-version: '6.0'  # Définir la version de .NET (ajustez selon votre version de .NET)
 
-    - name: Install dependencies
+    - name: Restore dependencies
       run: |
-        dotnet restore  # Restaurer les dépendances .NET (NuGet)
+        dotnet restore ./CalicotEncheres/Auctions/Auctions.csproj  # Restaurer les dépendances du projet spécifique
 
     - name: Build the application
       run: |
-        dotnet build --configuration Release  # Compiler l'application .NET en mode Release
+        dotnet build ./CalicotEncheres/Auctions/Auctions.csproj --configuration Release  # Compiler l'application
 
     - name: Publish the application
       run: |
-        dotnet publish --configuration Release --output ./publish  # Publier l'application dans le répertoire ./publish
+        dotnet publish ./CalicotEncheres/Auctions/Auctions.csproj --configuration Release --output ./publish  # Publier
 
     ##- name: Set up Azure CLI
     ##  uses: azure/cli-action@v1
