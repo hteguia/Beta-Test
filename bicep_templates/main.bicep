@@ -73,44 +73,46 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   }
 }
 
-resource scalingSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
-  name: 'autoscale-settings-${codeIdentification}'
-  location: location
-  properties: {
-    targetResourceId: appServicePlan.id
-    enabled: true
-    profiles: [
-      {
-        name: 'default-profile'
-        capacity: {
-          minimum: '1'  // Instance de base
-          maximum: '2'  // Limite supérieure du scale-out
-          default: '1'
-        }
-        rules: [
-          {
-            metricName: 'CpuPercentage'
-            timeAggregation: 'Average'
-            operator: 'GreaterThan'
-            threshold: 70
-            direction: 'Increase'
-            changeCount: 1
-            cooldown: 'PT5M'
-          }
-          {
-            metricName: 'CpuPercentage'
-            timeAggregation: 'Average'
-            operator: 'LessThan'
-            threshold: 30
-            direction: 'Decrease'
-            changeCount: 1
-            cooldown: 'PT5M'
-          }
-        ]
-      }
-    ]
-  }
-}
+// resource scalingSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
+//   name: 'autoscale-settings-${codeIdentification}'
+//   location: location
+//   properties: {
+//     targetResourceId: appServicePlan.id
+//     enabled: true
+//     profiles: [
+//       {
+//         name: 'default-profile'
+//         capacity: {
+//           minimum: '1'  // Instance de base
+//           maximum: '2'  // Limite supérieure du scale-out
+//           default: '1'
+//         }
+//         rules: [
+//           {
+//             metricName: 'CpuPercentage'
+//             timeAggregation: 'Average'
+//             operator: 'GreaterThan'
+//             threshold: 70
+//             direction: 'Increase'
+//             changeCount: 1
+//             cooldown: 'PT5M'
+//             metricTrigger: ''
+//             scaleAction: ''
+//           }
+//           {
+//             metricName: 'CpuPercentage'
+//             timeAggregation: 'Average'
+//             operator: 'LessThan'
+//             threshold: 30
+//             direction: 'Decrease'
+//             changeCount: 1
+//             cooldown: 'PT5M'
+//           }
+//         ]
+//       }
+//     ]
+//   }
+// }
 
 // Création du Key Vault
 resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' = {
