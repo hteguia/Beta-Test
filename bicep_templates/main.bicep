@@ -73,7 +73,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   }
 }
 
-resource scalingSettings 'Microsoft.Insights/autoscaleSettings@2019-03-01' = {
+resource scalingSettings 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
   name: 'autoscale-settings-${codeIdentification}'
   location: location
   properties: {
