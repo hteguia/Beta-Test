@@ -9,7 +9,7 @@ param vnetAddressPrefix string = '10.0.0.0/16'
 
 param codeIdentification string  = '1' // Paramètre pour l'identifiant unique
 
-param connectionString string  // Paramètre pour la chaîne de connexion à la base de données
+param connectionString string  = 'Data Source=LAPTOP-NBKHUSGP;Initial Catalog=Auctions_Data;Encrypt=False; Integrated Security=True;Pooling=False' // Paramètre pour la chaîne de connexion à la base de données
 
 // Nom du serveur SQL
 param sqlServerName string = 'sqlsrv-calicot-dev-${codeIdentification}'
