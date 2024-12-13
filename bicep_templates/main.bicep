@@ -124,6 +124,17 @@ resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' = {
       name: 'standard'  // SKU standard pour le Key Vault
     }
     tenantId: '764531e1-0809-47fc-a5f1-c23447738009'  // ID de votre tenant Azure (remplacez par le vôtre)
+    accessPolicies: [
+      {
+        objectId: '4d9f8586-001b-4d3f-9e0f-27a47124d148'  // ID de votre Service Principal
+        permissions: {
+          secrets: [
+            'get', 'list', 'set', 'delete'  // Permissions nécessaires pour accéder et gérer les secrets
+          ]
+        }
+        tenantId: '764531e1-0809-47fc-a5f1-c23447738009' 
+      }
+    ]
   }
 }
 
