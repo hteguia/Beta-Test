@@ -1,0 +1,45 @@
+name: Build and Deploy Web Application
+
+on:
+  push:
+    branches:
+      - main  # Déclenchement automatique lors d'un push sur la branche main
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # Récupérer le code source du dépôt
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0'  # Définir la version de .NET (ajustez selon votre application)
+
+    - name: Install dependencies
+      run: |
+        dotnet restore  # Restaurer les dépendances .NET (NuGet)
+
+    - name: Build the application
+      run: |
+        dotnet build --configuration Release  # Compiler l'application .NET en mode Release
+
+    - name: Publish the application
+      run: |
+        dotnet publish --configuration Release --output ./publish  # Publier l'application dans le répertoire ./publish
+
+    ##- name: Set up Azure CLI
+    ##  uses: azure/cli-action@v1
+    ##  with:
+    ##    azcliversion: 2.39.0  # Version de l'Azure CLI à utiliser
+
+    ##- name: Azure login
+    ##  uses: azure/login@v1
+    ##  with:
+    ##    creds: ${{ secrets.AZURE_CREDENTIALS }}  # Utilisez un secret GitHub pour stocker les informations d'authentification Azure
+
+    ##- name: Deploy to Azure App Service
+    ##  run: |
+    ##    az webapp deploy --resource-group <ResourceGroup> --name <AppName> --src-path ./publish  # Déployer l'application sur Azure App Service
