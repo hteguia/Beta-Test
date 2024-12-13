@@ -136,28 +136,28 @@ resource secret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
 
 
 // Déployer le serveur SQL
-resource sqlServer 'Microsoft.Sql/servers@2021-02-01-preview' = {
-  name: sqlServerName
-  location: location
-  properties: {
-    administratorLogin: 'sqladmin'  // Identifiant d'administrateur de la base de données
-    administratorLoginPassword: 'your-secure-password'  // Remplacez par un mot de passe sécurisé
-  }
-}
+// resource sqlServer 'Microsoft.Sql/servers@2021-02-01-preview' = {
+//   name: sqlServerName
+//   location: location
+//   properties: {
+//     administratorLogin: 'sqladmin'  // Identifiant d'administrateur de la base de données
+//     administratorLoginPassword: 'your-secure-password'  // Remplacez par un mot de passe sécurisé
+//   }
+// }
 
-// Déployer la base de données SQL
-resource sqlDatabase 'Microsoft.Sql/servers/databases@2021-02-01-preview' = {
-  parent: sqlServer
-  name: sqlDbName
-  location: location
-  properties: {
-    sku: {
-      name: 'Basic'
-      tier: 'Basic'
-      capacity: 5  // Capacité de la base de données pour le niveau Basic
-    }
-  }
-}
+// // Déployer la base de données SQL
+// resource sqlDatabase 'Microsoft.Sql/servers/databases@2021-02-01-preview' = {
+//   parent: sqlServer
+//   name: sqlDbName
+//   location: location
+//   properties: {
+//     sku: {
+//       name: 'Basic'
+//       tier: 'Basic'
+//       capacity: 5  // Capacité de la base de données pour le niveau Basic
+//     }
+//   }
+// }
 
 output vnetId string = vnet.id
 output vnetAddressPrefixes array = vnet.properties.addressSpace.addressPrefixes
